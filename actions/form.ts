@@ -4,6 +4,7 @@ import { formSchema, formSchemaType } from "@/schemas/form";
 import prisma from "../lib/prisma";
 
 export async function CreateForm(data: formSchemaType) {
+  "use client";
   const validation = formSchema.safeParse(data);
   if (!validation.success) {
     throw new Error("form not valid");

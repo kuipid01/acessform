@@ -16,7 +16,7 @@ import { HiCursorClick } from "react-icons/hi";
 import { Skeleton } from "@/components/ui/skeleton";
 import { formatDistance } from "date-fns";
 import Link from "next/link";
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { BiRightArrowAlt } from "react-icons/bi";
 import { FaEdit } from "react-icons/fa";
 
@@ -84,13 +84,8 @@ const Page = () => {
       </Dialog> */}
       <div className=" flex w-[90%] gap-4 flex-wrap">
         <CreateFormBtn />
-        <Suspense
-          fallback={[1, 4].map((el) => (
-            <FormCardSkeleton key={el} />
-          ))}
-        >
-          <FormCards />
-        </Suspense>
+
+        <FormCards />
       </div>
     </div>
   );
@@ -98,11 +93,42 @@ const Page = () => {
 
 export default Page;
 
-async function FormCards() {
-  const forms = await GetForms();
+function FormCards() {
+  const [forms, setForms] = useState([]);
+  const fetchData = async (url: string) => {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json(); // Parse the JSON response
+      return data;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      // Handle errors appropriately (e.g., display an error message to the user)
+    }
+  };
+
+  // Example usage
+  const apiUrl = "/api/gtforms"; // Replace with your actual API endpoint
+  useEffect(() => {
+    fetchData(apiUrl)
+      .then((data) => {
+        const forms = data.data;
+        setForms(forms);
+        console.log("Fetched data:", data);
+
+        // Use the fetched data in your application
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
+
+  console.log(forms);
   return (
     <>
-      {forms.map((form) => (
+      {forms.map((form: Form) => (
         <FormCard key={form.id} form={form} />
       ))}
     </>
