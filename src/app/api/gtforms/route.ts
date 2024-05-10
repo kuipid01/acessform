@@ -1,9 +1,8 @@
 import { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
 import prisma from "../../../../lib/prisma";
-import { NextApiRequest } from "next";
 
-export async function GET(req: NextApiRequest) {
+export async function GET() {
   try {
     const user = true;
     if (!user) {
