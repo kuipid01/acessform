@@ -4,7 +4,7 @@ import { useToast } from "@/components/ui/use-toast";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 
-const page = () => {
+const Page = () => {
   const { toast } = useToast();
 
   const handleRegister = (e: any) => {
@@ -68,4 +68,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 
-const page = () => {
+const Page = () => {
   const handleLogin = (e: any) => {
     e.preventDefault();
     if (!email && !password) return;
@@ -32,4 +32,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

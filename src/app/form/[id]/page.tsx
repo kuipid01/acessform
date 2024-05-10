@@ -2,7 +2,7 @@
 import { FormContext, FormProvider } from "@/context/formContext";
 import React, { useContext } from "react";
 
-export default function page() {
+export default function Page() {
   const { formData } = useContext(FormContext);
   console.log(formData);
   return (

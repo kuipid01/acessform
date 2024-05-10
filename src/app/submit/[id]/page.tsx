@@ -12,7 +12,7 @@ import EmailComponent from "@/components/EmailComponent";
 import { Form } from "@prisma/client";
 import { ImSpinner2 } from "react-icons/im";
 
-function page({
+function Page({
   params,
 }: {
   params: {
@@ -76,4 +76,4 @@ function page({
   );
 }
 
-export default page;
+export default Page;
