@@ -11,10 +11,12 @@ async function BuilderPage({
 }) {
   const { id } = params;
   const form = await GetFormById(Number(id));
+  const numberId = Number(id);
   if (!form) {
     throw new Error("form not found");
   }
-  return <FormBuilder />;
+  console.log(id);
+  return <FormBuilder id={numberId} />;
 }
 
 export default BuilderPage;

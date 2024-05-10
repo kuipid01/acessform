@@ -61,13 +61,26 @@ export async function GetFormById(id: number) {
     },
   });
 }
+export async function GetFormByShareUrl(shareURL: string) {
+  const user = true;
+  if (!user) {
+    //   throw new UserNotFoundErr();
+  }
 
-export async function PublishForm(id: number) {
+  return await prisma.form.findUnique({
+    where: {
+      userId: "123",
+      shareURL,
+    },
+  });
+}
+export async function PublishForm(id: number, content: string[]) {
   const user = true;
 
   return await prisma.form.update({
     data: {
       published: true,
+      content: content,
     },
     where: {
       userId: "123",

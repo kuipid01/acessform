@@ -1,6 +1,6 @@
 "use client";
 
-import { Plus } from "lucide-react";
+import { Copy, Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import {
   Card,
@@ -36,6 +36,8 @@ import { Label } from "@/components/ui/label";
 import CreateFormBtn from "@/components/ui/CreateFormButton";
 import { GetForms } from "../../../../actions/form";
 import { Form } from "@prisma/client";
+import { toast } from "@/components/ui/use-toast";
+import { ImShare } from "react-icons/im";
 
 const Page = () => {
   const router = useRouter();
@@ -112,13 +114,14 @@ function FormCardSkeleton() {
   );
 }
 function FormCard({ form }: { form: Form }) {
+  const shareLink = `${window.location.origin}/submit/${form.shareURL}`;
   return (
     <Card className=" mr-3 w-[350px]">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 justify-between">
           <span className="truncate font-bold">{form.name}</span>
-          {/* {form.published && <Badge>Published</Badge>}
-          {!form.published && <Badge variant={"destructive"}>Draft</Badge>} */}
+          {form.published && <Badge>Published</Badge>}
+          {!form.published && <Badge variant={"destructive"}>Draft</Badge>}
         </CardTitle>
         <CardDescription className="flex items-center justify-between text-muted-foreground text-sm">
           {formatDistance(form.createdAt, new Date(), {
@@ -131,10 +134,18 @@ function FormCard({ form }: { form: Form }) {
       </CardContent>
       <CardFooter>
         {form.published && (
-          <Button asChild className="w-full mt-2 text-md gap-4">
-            <Link href={`/forms/${form.id}`}>
-              View submissions <BiRightArrowAlt />
-            </Link>
+          <Button
+            className="w-[250px]"
+            onClick={() => {
+              navigator.clipboard.writeText(shareLink);
+              toast({
+                title: "Copied!",
+                description: "Link copied to clipboard",
+              });
+            }}
+          >
+            <ImShare className="mr-2 h-4 w-4" />
+            Share link
           </Button>
         )}
         {!form.published && (
