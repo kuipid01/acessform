@@ -1,6 +1,6 @@
 "use client";
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "../app/App.module.css";
 import CartDroppable from "@/components/cartdroppable/CartDroppable";
 import FruitDraggable from "@/components/fruitdraggable/Fruitdraggable";
@@ -12,6 +12,9 @@ import { useRouter } from "next/navigation";
 import { PublishForm } from "../../actions/form";
 import { FormContext, FormContextType } from "@/context/formContext";
 import { toast } from "./ui/use-toast";
+import PreviewSec from "./PreviewSec";
+import GenderComponent from "./Gender";
+import DatepickerComp from "./DatepickerComp";
 const FormBuilder = (newId: any) => {
   const router = useRouter();
 
@@ -39,6 +42,16 @@ const FormBuilder = (newId: any) => {
       id: 3,
       name: "Email",
       component: EmailComponent,
+    },
+    {
+      id: 4,
+      name: "Gender",
+      component: GenderComponent,
+    },
+    {
+      id: 5,
+      name: "DateOfBirth",
+      component: DatepickerComp,
     },
   ];
   const addItemsToCart = (e: DragEndEvent) => {
@@ -68,10 +81,10 @@ const FormBuilder = (newId: any) => {
     console.log(preview);
     setPreview(true);
   };
-  const [preview, setPreview] = useState(false);
+  const [preview, setPreview] = useState<boolean>(false);
   return (
     <DndContext onDragEnd={addItemsToCart}>
-      {preview && <PreviewSection id={newId} setPreview={setPreview} />}
+      {preview && <PreviewSec id={newId} setPreview={setPreview} />}
       <main className="flex justify-center bg-gray-300 w-full h-screen flex-col relative items-center">
         <div
           onClick={handlePreview}
@@ -98,49 +111,3 @@ const FormBuilder = (newId: any) => {
 };
 
 export default FormBuilder;
-
-const PreviewSection = (newid: any, { setPreview }: { setPreview: any }) => {
-  const router = useRouter();
-  const handlePublish = async () => {
-    const { id } = newid;
-    const idsOfcomponents = formData.map((data) => data.id.toLocaleString());
-    console.log(idsOfcomponents);
-
-    const form = await PublishForm(Number(id.id), idsOfcomponents);
-    console.log(form);
-    toast({
-      description:
-        "Form published succesfully, you will be redirected to homepage",
-    });
-    router.push("/dashboard");
-  };
-  const { formData } = useContext(FormContext);
-  return (
-    <div className=" w-full fixed h-screen z-30 flex-col gap-3  top-0 ter left-0 ">
-      <div className=" w-full h-screen bg-gray-600  absolute top-0 left-0">
-        {" "}
-      </div>
-
-      <X
-        onClick={() => setPreview(false)}
-        className=" absolute right-10 top-10 size-8 text-white cursor-pointer"
-      />
-      <h1 className=" relative uppercase text-white mb-3 text-3xl">
-        Simple Preview{" "}
-      </h1>
-      <button
-        onClick={handlePublish}
-        className=" relative w-[140px]  rounded-xl ter  text-white h-10  bg-orange-600"
-      >
-        Publish Form
-      </button>
-      <div className=" bg-white relative flex-col rounded-xl ter">
-        {formData?.map((item, idx) => (
-          <div key={`${item}-${idx}`} className="w-full">
-            <item.component />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};

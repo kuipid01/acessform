@@ -1,17 +1,14 @@
-import { Prisma } from "@prisma/client";
+import { Prisma, User } from "@prisma/client";
 import { NextResponse } from "next/server";
-import prisma from "../../../../lib/prisma";
+import prisma from "../../../../../lib/prisma";
 
-export async function GET() {
+export async function GET(req: Request, { params }: { params: any }) {
   try {
-    const user = true;
-    if (!user) {
-      //   throw new UserNotFoundErr();
-    }
+    const id = params.id;
 
     const forms = await prisma.form.findMany({
       where: {
-        userId: "123",
+        userId: id.toLocaleString(),
       },
       orderBy: {
         createdAt: "desc",

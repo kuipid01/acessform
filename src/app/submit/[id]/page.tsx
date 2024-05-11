@@ -11,6 +11,8 @@ import NumberComponent from "@/components/NumberComponent";
 import EmailComponent from "@/components/EmailComponent";
 import { Form } from "@prisma/client";
 import { ImSpinner2 } from "react-icons/im";
+import GenderComponent from "@/components/Gender";
+import DatepickerComp from "@/components/DatepickerComp";
 
 function Page({
   params,
@@ -35,6 +37,16 @@ function Page({
       name: "Email",
       component: EmailComponent,
     },
+    {
+      id: 4,
+      name: "Gender",
+      component: GenderComponent,
+    },
+    {
+      id: 5,
+      name: "DateOfBirth",
+      component: DatepickerComp,
+    },
   ];
   const [formComponents, setFormComponents] = useState<any>([]);
   const [form, setForm] = useState<Form | null>();
@@ -52,26 +64,29 @@ function Page({
 
     getForm();
   }, []);
-
+  console.log(form);
+  console.log(formComponents);
   return (
     <div className=" w-full h-screen ter bg-gray-200">
-      {formComponents.length > 0 && (
-        <ul className=" w-[80%]  rounded-xl ter bg-white  overflow-y-auto flex flex-col gap-2 p-4 ">
-          <h1 className=" text-2xl capitalize font-bold w-full flex items-start justify-start">
-            {form?.name}
-          </h1>
+      <div className=" h-[500px] w-[80%] overflow-y-auto">
+        {formComponents.length > 0 && (
+          <ul className=" w-[80%]  rounded-xl ter bg-white  overflow-y-auto flex flex-col gap-2 p-4 ">
+            <h1 className=" text-2xl capitalize font-bold w-full flex items-start justify-start">
+              {form?.name}
+            </h1>
 
-          {formComponents?.map((item: any, idx: any) => (
-            <div key={`${idx}`} className="w-full">
-              <item.component />
-            </div>
-          ))}
+            {formComponents?.map((item: any, idx: any) => (
+              <div key={`${idx}`} className="w-full">
+                <item.component />
+              </div>
+            ))}
 
-          {formComponents.length <= 0 && (
-            <ImSpinner2 className="animate-spin h-12 w-12" />
-          )}
-        </ul>
-      )}
+            {formComponents.length <= 0 && (
+              <ImSpinner2 className="animate-spin h-12 w-12" />
+            )}
+          </ul>
+        )}
+      </div>
     </div>
   );
 }

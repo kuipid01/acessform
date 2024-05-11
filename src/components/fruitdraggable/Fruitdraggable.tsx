@@ -22,6 +22,7 @@ const FruitDraggable: FC<IFruitDraggable> = (props) => {
       style={{ transform: CSS.Translate.toString(transform) }}
       {...attributes}
       {...listeners}
+      className="w- border-gray-300 bg-black text-white p-4 ter rounded-lg uppercase font-bold border"
     >
       {props.children.name}
     </div>
