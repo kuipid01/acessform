@@ -11,12 +11,14 @@ export async function CreateUser(data: userSchemaType) {
 
   const { email, password } = data;
   try {
+    console.log(email);
     const prevUser = await prisma.user.findUnique({
       where: {
         email,
       },
     });
     if (prevUser) {
+      console.log(prevUser);
       return { success: true, message: "user already exist", data: prevUser };
     } else {
       const user = await prisma.user.create({

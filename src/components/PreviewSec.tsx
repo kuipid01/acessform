@@ -48,7 +48,7 @@ const PreviewSec: React.FC<PreviewSecProps> = ({ setPreview, id }) => {
       {formData.length > 0 && (
         <button
           onClick={handlePublish}
-          className=" w-[140px] absolute top-14 right-10 rounded-xl ter text-white h-10 bg-orange-600"
+          className=" w-[140px] absolute top-[90px] right-10 rounded-xl ter text-white h-10 bg-orange-600"
         >
           Publish Form
         </button>

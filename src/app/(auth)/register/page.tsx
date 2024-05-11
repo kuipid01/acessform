@@ -5,10 +5,12 @@ import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { CreateUser } from "../../../../actions/user";
 import { useRouter } from "next/navigation";
+import { ImSpinner2 } from "react-icons/im";
 
 const Page = () => {
   const { toast } = useToast();
 
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const handleRegister = async (e: any) => {
     e.preventDefault();
@@ -27,8 +29,10 @@ const Page = () => {
       return;
     }
     try {
+      setLoading(true);
       const data = await CreateUser({ email, password });
-      if ((data.message = "user already exist")) {
+      if (data.message) {
+        setLoading(false);
         console.log("here");
         toast({
           description: "You ve an account already , you ill b redirected",
@@ -39,9 +43,11 @@ const Page = () => {
         setUser(data.data);
         const { password, ...userData } = data.data;
         localStorage.setItem("user", JSON.stringify(userData));
+        setLoading(false);
         router.push(`/dashboard`);
       }
     } catch {
+      setLoading(false);
       console.log("error");
     }
   };
@@ -78,8 +84,15 @@ const Page = () => {
             placeholder="Confirm Password"
           />
         </div>
-        <button className="w-full h-[50px] rounded-md bg-black text-white">
-          Register
+        <button
+          disabled={loading}
+          className="w-full h-[50px] ter rounded-md bg-black text-white"
+        >
+          {loading ? (
+            <ImSpinner2 className="animate-spin h-12 w-12" />
+          ) : (
+            "Register"
+          )}
         </button>
         <p className=" text-sm italic ">
           Have an account ?{" "}

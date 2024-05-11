@@ -74,7 +74,7 @@ const Page = () => {
           </DialogFooter>
         </DialogContent>
       </Dialog> */}
-      <div className=" flex w-[90%] ter gap-4 flex-wrap">
+      <div className=" flex w-[90%] h-[70vh] ter gap-4 flex-wrap">
         <CreateFormBtn user={user} />
 
         <FormCards user={user} />

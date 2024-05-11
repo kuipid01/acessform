@@ -68,7 +68,7 @@ function Page({
   console.log(formComponents);
   return (
     <div className=" w-full h-screen ter bg-gray-200">
-      <div className=" h-[500px] w-[80%] overflow-y-auto">
+      <div className=" h-[500px] w-[80%] ter overflow-y-auto">
         {formComponents.length > 0 && (
           <ul className=" w-[80%]  rounded-xl ter bg-white  overflow-y-auto flex flex-col gap-2 p-4 ">
             <h1 className=" text-2xl capitalize font-bold w-full flex items-start justify-start">

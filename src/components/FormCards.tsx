@@ -36,17 +36,17 @@ export default function FormCards(user: any) {
   }, [user.id]);
   // console.log(forms);
 
-  if (formsArray.length <= 0) {
+  if (!formsArray) {
     return (
-      <div className=" h-screen flex ter flex-wrap gap-5 ">
-        {[0, 1, 2, 3].map((single, i) => (
+      <div className=" h-fit flex ter flex-wrap gap-5 ">
+        {[0, 3].map((single, i) => (
           <FormCardSkeleton key={i} />
         ))}{" "}
       </div>
     );
   }
   return (
-    <div className=" flex gap-3">
+    <div className=" flex h-fit gap-3">
       {formsArray.map((form: Form) => (
         <FormCard key={form.id} form={form} />
       ))}

@@ -5,10 +5,11 @@ import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { CreateUser, LoginUser } from "../../../../actions/user";
 import { useRouter } from "next/navigation";
+import { ImSpinner2 } from "react-icons/im";
 
 const Page = () => {
   const { toast } = useToast();
-
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const handleLogin = async (e: any) => {
     e.preventDefault();
@@ -21,11 +22,13 @@ const Page = () => {
     }
 
     try {
+      setLoading(true);
       const data = await LoginUser({ email, password });
       console.log(data);
 
       if (!data.data) {
         console.log("here");
+        setLoading(false);
         toast({
           variant: "destructive",
           description: data.message,
@@ -34,11 +37,12 @@ const Page = () => {
         return;
       } else {
         // return;
-
+        setLoading(false);
         localStorage.setItem("user", JSON.stringify(data.data));
         router.push(`/dashboard`);
       }
     } catch {
+      setLoading(false);
       console.log("error");
     }
   };
@@ -68,8 +72,15 @@ const Page = () => {
           />
         </div>
 
-        <button className="w-full h-[50px] rounded-md bg-black text-white">
-          Get in joor
+        <button
+          disabled={loading}
+          className="w-full h-[50px] ter rounded-md bg-black text-white"
+        >
+          {loading ? (
+            <ImSpinner2 className="animate-spin h-12 w-12" />
+          ) : (
+            "Get in joor"
+          )}
         </button>
         <p className=" text-sm italic ">
           Dont have an account ?{" "}
