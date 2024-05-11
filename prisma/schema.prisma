@@ -14,7 +14,7 @@ datasource db {
 
 model Form {
   id          Int      @id @default(autoincrement())
-  userId      Int
+  userId      String
   createdAt   DateTime @default(now())
   published   Boolean  @default(false)
   name        String
