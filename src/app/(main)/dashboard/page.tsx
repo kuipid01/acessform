@@ -4,15 +4,12 @@ import { useRouter } from "next/navigation";
 import React, { Suspense, useEffect, useState } from "react";
 import CreateFormBtn from "@/components/ui/CreateFormButton";
 import FormCards from "@/components/FormCards";
+import { User } from "@prisma/client";
+import { ImSpinner2 } from "react-icons/im";
 
 const Page = () => {
   const router = useRouter();
-  const userData = localStorage.getItem("user");
-  if (!userData) {
-    router.push("/login");
-    return;
-  }
-  const user = JSON.parse(userData);
+
   // console.log(user);
   // const [user, setUser] = useState<User>();
   // if (userData !== undefined) {
@@ -21,7 +18,25 @@ const Page = () => {
   // const createForm = () => {
   //   router.push("/formcreator");
   // };
-
+  const [user, setUser] = useState<User>();
+  useEffect(() => {
+    const setUserFn = () => {
+      const userData = localStorage.getItem("user");
+      if (!userData) {
+        router.push("/login");
+        return;
+      }
+      const user = JSON.parse(userData);
+      setUser(user);
+    };
+    setUserFn();
+  }, []);
+  if (!user)
+    return (
+      <div className="flex h-screen ter items-center justify-center w-full ">
+        <ImSpinner2 className="animate-spin h-12 w-12" />
+      </div>
+    );
   return (
     <div className="ter  h-screen">
       {/* <Dialog>
