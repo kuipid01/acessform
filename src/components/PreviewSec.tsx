@@ -36,7 +36,7 @@ const PreviewSec: React.FC<PreviewSecProps> = ({ setPreview, id }) => {
   const { formData } = useContext(FormContext);
 
   return (
-    <div className="w-full fixed h-screen z-30 ter flex-col gap-3p-5 top-0 left-0">
+    <div className="w-full fixed h-fit  z-[6000] ter flex-col gap-3 p-5 top-0 left-0">
       <div className="w-full h-screen bg-gray-600 absolute top-0 left-0"></div>
       <X
         onClick={handlePreview}
@@ -53,7 +53,7 @@ const PreviewSec: React.FC<PreviewSecProps> = ({ setPreview, id }) => {
           Publish Form
         </button>
       )}
-      <div className="bg-white overflow-y-auto relative p-5 h-fit flex-col rounded-xl ter">
+      <div className="bg-red-700 overflow-y-auto relative p-5 py-10 h-[500px] flex-col rounded-xl ter">
         {formData.map((item, idx) => (
           <div key={idx} className="w-full">
             <item.component />

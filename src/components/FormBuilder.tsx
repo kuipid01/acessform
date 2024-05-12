@@ -102,7 +102,7 @@ const FormBuilder = (newId: any) => {
       <main className="flex justify-center bg-gray-300 w-full h-screen flex-col relative items-center">
         <div
           onClick={handlePreview}
-          className="absolute right-5 cursor-pointer top-5 w-[150px] flex gap-2  h-[40px] ter font-bold text-sm rounded-lg text-white bg-black"
+          className="absolute right-5 z-[5000] top-[100px] cursor-pointer  w-[150px] flex gap-2  h-[40px] ter font-bold text-sm rounded-lg text-white bg-black"
         >
           <PresentationIcon size={15} />
           Preview Form

@@ -15,7 +15,7 @@ const CartDroppable: FC<ICartDroppable> = (props) => {
 
   return (
     <ul
-      className=" w-full ter  overflow-y-auto flex flex-col gap-2 p-4 "
+      className=" w-full ter h-[600px]   overflow-y-auto flex flex-col gap-2 p-4 "
       ref={setNodeRef}
     >
       {props.items !== null && props.items.length === 0 && (
