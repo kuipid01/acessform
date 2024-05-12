@@ -53,7 +53,7 @@ const PreviewSec: React.FC<PreviewSecProps> = ({ setPreview, id }) => {
           Publish Form
         </button>
       )}
-      <div className="bg-red-700 overflow-y-auto relative p-5 py-10 h-[500px] flex-col rounded-xl ter">
+      <div className="overflow-y-auto relative p-5 py-10 h-[500px] flex-col rounded-xl ter">
         {formData.map((item, idx) => (
           <div key={idx} className="w-full">
             <item.component />
