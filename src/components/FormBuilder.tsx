@@ -15,8 +15,22 @@ import { toast } from "./ui/use-toast";
 import PreviewSec from "./PreviewSec";
 import GenderComponent from "./Gender";
 import DatepickerComp from "./DatepickerComp";
+import { User } from "@prisma/client";
 const FormBuilder = (newId: any) => {
   const router = useRouter();
+  const [user, setUser] = useState<User>();
+  useEffect(() => {
+    const checkUser = () => {
+      const userData = localStorage.getItem("user");
+      if (!userData) {
+        router.push("/login");
+        return;
+      }
+      const user = JSON.parse(userData);
+      setUser(user);
+    };
+    checkUser();
+  }, []);
 
   const { setFormData, formData } = useContext(FormContext);
   const [components, setComponents] = useState<any>([]);

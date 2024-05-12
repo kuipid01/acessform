@@ -36,7 +36,7 @@ export default function FormCards(user: any) {
   }, [user.id]);
   // console.log(forms);
 
-  if (!formsArray) {
+  if (formsArray.length <= 0) {
     return (
       <div className=" h-fit flex ter flex-wrap gap-5 ">
         {[0, 3].map((single, i) => (

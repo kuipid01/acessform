@@ -67,14 +67,17 @@ function Page({
   console.log(form);
   console.log(formComponents);
   return (
-    <div className=" w-full h-screen ter bg-gray-200">
-      <div className=" h-[500px] w-[80%] ter overflow-y-auto">
+    <div className=" w-full mt-[10vh] py-[100px] h-fit ter bg-gray-500">
+      <div className=" h-fit flex  flex-col w-[80%] ter overflow-y-auto">
+        <h1 className=" text-2xl font-bold uppercase text-gray-50 mb-5 ">
+          Access Form
+        </h1>
         {formComponents.length > 0 && (
-          <ul className=" w-[80%]  rounded-xl ter bg-white  overflow-y-auto flex flex-col gap-2 p-4 ">
+          <ul className=" w-[80%] py-5 h-fit rounded-xl ter bg-white  overflow-y-auto flex flex-col gap-2 px-4 ">
             <h1 className=" text-2xl capitalize font-bold w-full flex items-start justify-start">
-              {form?.name}
+              Form Name: {form?.name}
             </h1>
-
+            <hr className=" w-full h-[1px] bg-gray-300 my-5" />
             {formComponents?.map((item: any, idx: any) => (
               <div key={`${idx}`} className="w-full">
                 <item.component />

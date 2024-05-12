@@ -9,10 +9,9 @@ export default function Home() {
         {/* <Nav/> */}
 
         <h1 className=" text-4xl">Your Custom Form Builder</h1>
-        <p className=" max-w-[650px] mb-5 mt-2 leading-9">
-          Create and crafts form easily Lorem ipsum dolor sit amet, consectetur
-          adipisicing elit. Ipsam ducimus voluptatem mollitia modi sit corrupti
-          in saepe maxime fuga aperiam.
+        <p className=" max-w-[650px] text-[20px] text-center mb-5 mt-4 leading-9">
+          Create and crafts form easily with our custom drag and drop feature,
+          Easily preview forms, share link for others to see.
         </p>
         <Link
           className="w-[250px] rounded-md flex justify-center items-center font-bold  h-[58px] bg-black text-white  "
@@ -20,6 +19,14 @@ export default function Home() {
         >
           Start Now
         </Link>
+        <div className="w-full absolute bottom-0 left-0  h-[300px]">
+          <Image
+            src="/waves.svg"
+            className="relative object-cover"
+            alt="waves "
+            fill
+          />
+        </div>
       </main>
     </FormProvider>
   );
