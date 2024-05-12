@@ -2,9 +2,9 @@
 
 import { formSchema, formSchemaType } from "@/schemas/form";
 import prisma from "../lib/prisma";
+import { Prisma } from "@prisma/client";
 
 export async function CreateForm(data: formSchemaType, userId: number) {
-  "use client";
   const validation = formSchema.safeParse(data);
   if (!validation.success) {
     throw new Error("form not valid");
@@ -26,7 +26,26 @@ export async function CreateForm(data: formSchemaType, userId: number) {
 
   return form.id;
 }
-
+export async function PopulateForms(data: any, formId: number, userId: number) {
+  const form = await prisma.formData.create({
+    data: {
+      Data: data as Prisma.JsonObject,
+      formId,
+      userId,
+    },
+  });
+  return form;
+}
+export async function fetchProspects(id: any) {
+  // console.log("fetch prospects", id);
+  const data = await prisma.formData.findMany({
+    where: {
+      userId: id,
+    },
+  });
+  console.log(data);
+  return data;
+}
 export async function GetForms() {
   const user = true;
   if (!user) {

@@ -21,7 +21,7 @@ export default function FormCard({ form }: { form: Form }) {
   const shareLink = `${window.location.origin}/submit/${form.shareURL}`;
   console.log(form);
   return (
-    <Card className=" mr-3 w-[350px]">
+    <Card className="  w-full md:w-[calc(33.333%-20px)]">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 justify-between">
           <span className="truncate font-bold">{form.name}</span>

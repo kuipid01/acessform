@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import {
   Select,
@@ -8,11 +7,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const GenderComponent: React.FC = () => {
+const GenderComponent: React.FC<{
+  setData: React.Dispatch<React.SetStateAction<any>>;
+  data: any;
+}> = ({ setData, data }) => {
   return (
-    <div className=" flex gap-3 flex-col w-full  p-5">
+    <div className="flex gap-3 flex-col w-full p-5">
       <h1>Gender</h1>
-      <Select>
+      <Select onValueChange={(value) => setData({ ...data, gender: value })}>
         <SelectTrigger className="w-full">
           <SelectValue placeholder="Gender" />
         </SelectTrigger>

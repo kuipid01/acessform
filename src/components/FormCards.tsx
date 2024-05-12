@@ -46,7 +46,7 @@ export default function FormCards(user: any) {
     );
   }
   return (
-    <div className=" flex h-fit gap-3">
+    <div className=" flex h-fit w-full flex-wrap gap-[20px]">
       {formsArray.map((form: Form) => (
         <FormCard key={form.id} form={form} />
       ))}

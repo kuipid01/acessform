@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "FormData" ADD COLUMN     "userId" INTEGER NOT NULL DEFAULT 1;

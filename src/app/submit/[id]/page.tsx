@@ -4,15 +4,23 @@
 //         window.open(shareLink, "_blank");
 //       }}
 "use client";
+import Confetti from "react-confetti";
 import React, { useEffect, useState } from "react";
-import { GetFormById, GetFormByShareUrl } from "../../../../actions/form";
+import {
+  GetFormById,
+  GetFormByShareUrl,
+  PopulateForms,
+} from "../../../../actions/form";
 import FullNameComponent from "@/components/FullNameComponent";
 import NumberComponent from "@/components/NumberComponent";
 import EmailComponent from "@/components/EmailComponent";
-import { Form } from "@prisma/client";
+import { Form, User } from "@prisma/client";
 import { ImSpinner2 } from "react-icons/im";
 import GenderComponent from "@/components/Gender";
 import DatepickerComp from "@/components/DatepickerComp";
+import { useToast } from "@/components/ui/use-toast";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 function Page({
   params,
@@ -21,6 +29,21 @@ function Page({
     id: string;
   };
 }) {
+  const router = useRouter();
+  const [user, setUser] = useState<User>();
+  useEffect(() => {
+    const setUserFn = () => {
+      const userData = localStorage.getItem("user");
+      if (!userData) {
+        router.push("/login");
+        return;
+      }
+      const user = JSON.parse(userData);
+      setUser(user);
+    };
+    setUserFn();
+  }, []);
+  const { toast } = useToast();
   const componentArray = [
     {
       id: 1,
@@ -50,6 +73,7 @@ function Page({
   ];
   const [formComponents, setFormComponents] = useState<any>([]);
   const [form, setForm] = useState<Form | null>();
+
   useEffect(() => {
     const getForm = async () => {
       const form = await GetFormByShareUrl(params.id);
@@ -64,8 +88,53 @@ function Page({
 
     getForm();
   }, []);
-  console.log(form);
-  console.log(formComponents);
+  // console.log(form);
+  // console.log(formComponents);
+  const [data, setData] = useState({
+    firstname: "",
+    surname: "",
+    date: "",
+    email: "",
+    gender: "",
+  });
+
+  const [submitted, setSubmitted] = useState(false);
+  const handleSubmitForm = async () => {
+    if (form === undefined) return;
+    if (form === null) return;
+    if (user === null) return;
+    if (user === undefined) return;
+    const formData = await PopulateForms(data, form.id, user.id);
+    if (!formData) return;
+    toast({
+      description: "Your Form has been submitted",
+    });
+    setSubmitted(true);
+  };
+  // console.log(data);
+  if (submitted)
+    return (
+      <>
+        <Confetti
+          width={window.innerWidth}
+          height={window.innerHeight}
+          recycle={false}
+          numberOfPieces={1000}
+        />
+        <div className=" w-full  ter flex-col h-screen pt-[10vh]">
+          <h1 className="text-center text-4xl font-bold text-primary border-b pb-2 mb-10">
+            🎊🎊 Form Submitted 🎊🎊
+          </h1>
+
+          <Link
+            className=" w-1/2 bg-black mx-auto  text-white h-12 rounded-xl ter font-bold to-white"
+            href="/register"
+          >
+            Create Your Own Form Now
+          </Link>
+        </div>
+      </>
+    );
   return (
     <div className=" w-full mt-[10vh] py-[100px] h-fit ter bg-gray-500">
       <div className=" h-fit flex  flex-col w-[80%] ter overflow-y-auto">
@@ -80,13 +149,19 @@ function Page({
             <hr className=" w-full h-[1px] bg-gray-300 my-5" />
             {formComponents?.map((item: any, idx: any) => (
               <div key={`${idx}`} className="w-full">
-                <item.component />
+                <item.component setData={setData} data={data} />
               </div>
             ))}
 
             {formComponents.length <= 0 && (
               <ImSpinner2 className="animate-spin h-12 w-12" />
             )}
+            <button
+              onClick={handleSubmitForm}
+              className=" w-full h-12 rounded-xl ter bg-black text-white font-bold uppercase"
+            >
+              Submit Form
+            </button>
           </ul>
         )}
       </div>

@@ -1,5 +1,4 @@
 import React from "react";
-// import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 
@@ -12,11 +11,17 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-export default function DatepickerComp() {
+export default function DatepickerComp({
+  setData,
+  data,
+}: {
+  setData: React.Dispatch<React.SetStateAction<any>>;
+  data: any;
+}) {
   const [date, setDate] = React.useState<Date>();
 
   return (
-    <div className=" flex flex-col gap-5">
+    <div className="flex flex-col gap-5">
       <h1>Choose Date Of Birth</h1>
       <Popover>
         <PopoverTrigger asChild>
@@ -33,6 +38,7 @@ export default function DatepickerComp() {
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0">
           <Calendar
+            onDayBlur={() => setData({ ...data, date: date?.toDateString() })}
             mode="single"
             selected={date}
             onSelect={setDate}

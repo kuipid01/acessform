@@ -6,6 +6,7 @@ import CreateFormBtn from "@/components/ui/CreateFormButton";
 import FormCards from "@/components/FormCards";
 import { User } from "@prisma/client";
 import { ImSpinner2 } from "react-icons/im";
+import Prospects from "@/components/Prospects";
 
 const Page = () => {
   const router = useRouter();
@@ -31,12 +32,13 @@ const Page = () => {
     };
     setUserFn();
   }, []);
-  if (!user)
+  if (!user) {
     return (
       <div className="flex h-screen ter items-center justify-center w-full ">
         <ImSpinner2 className="animate-spin h-12 w-12" />
       </div>
     );
+  }
   return (
     <div className="ter  h-screen">
       {/* <Dialog>
@@ -78,6 +80,7 @@ const Page = () => {
         <CreateFormBtn user={user} />
 
         <FormCards user={user} />
+        <Prospects user={user} />
       </div>
     </div>
   );

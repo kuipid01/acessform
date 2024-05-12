@@ -8,6 +8,8 @@ interface IFruitDraggable {
     name: string;
     component: React.FunctionComponent;
   };
+  setData: React.Dispatch<React.SetStateAction<any>>;
+  data: any;
 }
 
 const FruitDraggable: FC<IFruitDraggable> = (props) => {

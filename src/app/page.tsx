@@ -14,12 +14,12 @@ export default function Home() {
           Easily preview forms, share link for others to see.
         </p>
         <Link
-          className="w-[250px] rounded-md flex justify-center items-center font-bold  h-[58px] bg-black text-white  "
+          className="w-[250px] relative cursor-pointer rounded-md flex justify-center items-center font-bold  h-[58px] bg-black text-white  "
           href="/register"
         >
           Start Now
         </Link>
-        <div className="w-full absolute bottom-0 left-0  h-[300px]">
+        <div className="w-full   absolute bottom-0 left-0  h-[200px]">
           <Image
             src="/waves.svg"
             className="relative object-cover"

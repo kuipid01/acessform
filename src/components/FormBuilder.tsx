@@ -109,8 +109,9 @@ const FormBuilder = (newId: any) => {
         </div>
         <div className=" h-screen absolute left-0 py-10 px-5  top-0 w-[300px] bg-gray-200">
           <h1 className=" text-3xl font-bold ">Form attributes</h1>
-          <ul className=" flex flex-col gap-2 p-3">
+          <ul className="flex flex-col gap-2 p-3">
             {componentArray.map((fruit) => (
+              // @ts-ignore
               <FruitDraggable key={fruit.id}>{fruit}</FruitDraggable>
             ))}
           </ul>
