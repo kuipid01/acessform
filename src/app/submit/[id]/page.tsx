@@ -35,7 +35,6 @@ function Page({
     const setUserFn = () => {
       const userData = localStorage.getItem("user");
       if (!userData) {
-        router.push("/login");
         return;
       }
       const user = JSON.parse(userData);
@@ -104,7 +103,8 @@ function Page({
     if (form === null) return;
     if (user === null) return;
     if (user === undefined) return;
-    const formData = await PopulateForms(data, form.id, user.id);
+
+    const formData = await PopulateForms(data, form.id, Number(form.userId));
     if (!formData) return;
     toast({
       description: "Your Form has been submitted",
