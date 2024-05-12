@@ -17,12 +17,12 @@ export default function Nav() {
   }, []);
 
   return (
-    <div className="absolute bg-white top-0 left-0 w-full px-[53px]  py-5 h-[10vh] flex justify-between ">
+    <div className="absolute  bg-white top-0 left-0 w-full px-[53px]  py-5 h-[10vh] flex justify-between ">
       <Link href="/" className=" text-3xl uppercase font-semibold ">
         AssessForm
       </Link>
       {!user && (
-        <div className="flex gap-3">
+        <div className="flex gap-3 relative">
           <Link
             className=" bg-[#0A0513] cursor-pointer text-white h-10 w-[150px] rounded-md flex justify-center items-center border "
             href="/register"
@@ -39,7 +39,7 @@ export default function Nav() {
       )}
       {user && (
         <Link
-          className=" bg-[#0A0513]  gap-1 font-bold uppercase cursor-pointer text-white h-10 w-[170px] rounded-md flex justify-center items-center border "
+          className=" bg-[#0A0513] cursor-pointer relative  gap-1 font-bold uppercase  text-white h-10 w-[170px] rounded-md flex justify-center items-center border "
           href="/dashboard"
         >
           <User2Icon size={15} /> Dashboard{" "}
