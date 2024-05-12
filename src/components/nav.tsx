@@ -17,7 +17,7 @@ export default function Nav() {
   }, []);
 
   return (
-    <div className="absolute  bg-white top-0 left-0 w-full px-[53px]  py-5 h-[10vh] flex justify-between ">
+    <div className="absolute z-[5000] bg-white top-0 left-0 w-full px-[53px]  py-5 h-[10vh] flex justify-between ">
       <Link href="/" className=" text-3xl uppercase font-semibold ">
         AssessForm
       </Link>
