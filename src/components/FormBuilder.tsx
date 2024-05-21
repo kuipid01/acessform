@@ -69,9 +69,8 @@ const FormBuilder = (newId: any) => {
     },
   ];
   const addItemsToCart = (e: DragEndEvent) => {
-    console.log(e);
-
     const newItem = e.active.data.current?.title;
+    console.log(newItem);
     if (e.over?.id !== "cart-droppable" || !newItem) return;
     console.log(newItem);
     const temp = [...formData];

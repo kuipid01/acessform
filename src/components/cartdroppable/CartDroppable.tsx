@@ -10,7 +10,7 @@ interface ICartDroppable {
 
 const CartDroppable: FC<ICartDroppable> = (props) => {
   const { setNodeRef } = useDroppable({
-    id: "cart-droppable",
+    id: "item",
   });
 
   return (

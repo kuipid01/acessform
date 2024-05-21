@@ -17,9 +17,13 @@ import { Form } from "@prisma/client";
 import { formatDistance } from "date-fns";
 import { Badge } from "./ui/badge";
 import { toast } from "./ui/use-toast";
+import { Delete } from "lucide-react";
+import { DeleteForm } from "../../actions/form";
 export default function FormCard({ form }: { form: Form }) {
   const shareLink = `${window.location.origin}/submit/${form.shareURL}`;
-  console.log(form);
+  const handleDelete = () => {
+    DeleteForm(form.id);
+  };
   return (
     <Card className="  w-full md:w-[calc(33.333%-20px)]">
       <CardHeader>
@@ -39,19 +43,25 @@ export default function FormCard({ form }: { form: Form }) {
       </CardContent>
       <CardFooter>
         {form.published && (
-          <Button
-            className="w-[250px]"
-            onClick={() => {
-              navigator.clipboard.writeText(shareLink);
-              toast({
-                title: "Copied!",
-                description: "Link copied to clipboard",
-              });
-            }}
-          >
-            <ImShare className="mr-2 h-4 w-4" />
-            Share link
-          </Button>
+          <>
+            <Button
+              className="w-[250px]"
+              onClick={() => {
+                navigator.clipboard.writeText(shareLink);
+                toast({
+                  title: "Copied!",
+                  description: "Link copied to clipboard",
+                });
+              }}
+            >
+              <ImShare className="mr-2 h-4 w-4" />
+              Share link
+            </Button>
+            <Button onClick={handleDelete} className="">
+              {" "}
+              Delete Form
+            </Button>
+          </>
         )}
         {!form.published && (
           <Button

@@ -36,6 +36,18 @@ export async function PopulateForms(data: any, formId: number, userId: number) {
   });
   return form;
 }
+export async function DeleteForm (id:number){
+await prisma.form.delete({
+  where:{
+    id
+  }
+})
+await prisma.formData.delete({
+  where:{
+    formId:id
+  }
+})
+}
 export async function fetchProspects(id: any) {
   // console.log("fetch prospects", id);
   const data = await prisma.formData.findMany({
